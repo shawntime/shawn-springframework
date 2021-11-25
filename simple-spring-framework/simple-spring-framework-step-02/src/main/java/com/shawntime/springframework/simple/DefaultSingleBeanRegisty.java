@@ -3,11 +3,11 @@ package com.shawntime.springframework.simple;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.hutool.core.util.StrUtil;
+
 public class DefaultSingleBeanRegisty implements SingleBeanRegistry {
 
     private Map<String, Object> beanNameMap = new HashMap<>();
-
-    private Map<Class<?>, Object> beanClassMap = new HashMap<>();
 
     @Override
     public Object getSingletonBean(String beanName) {
@@ -16,7 +16,7 @@ public class DefaultSingleBeanRegisty implements SingleBeanRegistry {
 
     @Override
     public Object getSingletonBean(Class<?> clazz) {
-        return beanClassMap.get(clazz);
+        return beanNameMap.get(StrUtil.lowerFirst(clazz.getSimpleName()));
     }
 
     protected void addSingletonBean(String beanName, Object bean) {
@@ -24,6 +24,7 @@ public class DefaultSingleBeanRegisty implements SingleBeanRegistry {
     }
 
     protected void addSingletonBean(Class<?> clazz, Object bean) {
-        beanClassMap.put(clazz, bean);
+        String beanName = StrUtil.lowerFirst(clazz.getSimpleName());
+        addSingletonBean(beanName, bean);
     }
 }
