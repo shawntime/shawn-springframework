@@ -1,5 +1,7 @@
 package com.shawntime.springframework.simple;
 
+import cn.hutool.core.util.StrUtil;
+
 public abstract class AbstractBeanFactory extends DefaultSingleBeanRegistry implements BeanFactory {
 
     @Override
@@ -14,17 +16,11 @@ public abstract class AbstractBeanFactory extends DefaultSingleBeanRegistry impl
 
     @Override
     public Object getBean(Class<?> clazz) {
-        Object bean = getSingletonBean(clazz);
-        if (bean != null) {
-            return bean;
-        }
-        BeanDefinition beanDefinition = getBeanDefinition(clazz);
-        return createBean(clazz, beanDefinition);
+        String beanName = StrUtil.lowerFirst(clazz.getSimpleName());
+        return getBean(beanName);
     }
 
     protected abstract BeanDefinition getBeanDefinition(String beanName);
-
-    protected abstract BeanDefinition getBeanDefinition(Class<?> clazz);
 
     protected abstract Object createBean(String beanName, BeanDefinition beanDefinition);
 
