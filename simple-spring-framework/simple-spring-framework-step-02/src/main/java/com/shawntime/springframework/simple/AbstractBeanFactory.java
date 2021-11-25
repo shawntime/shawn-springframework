@@ -1,6 +1,6 @@
 package com.shawntime.springframework.simple;
 
-public abstract class AbstractBeanFactory extends DefaultSingleBeanRegisty implements BeanFactory {
+public abstract class AbstractBeanFactory extends DefaultSingleBeanRegistry implements BeanFactory {
 
     @Override
     public Object getBean(String beanName) {
