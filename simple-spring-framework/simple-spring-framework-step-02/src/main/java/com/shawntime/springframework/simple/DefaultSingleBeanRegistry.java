@@ -5,7 +5,7 @@ import java.util.Map;
 
 import cn.hutool.core.util.StrUtil;
 
-public class DefaultSingleBeanRegisty implements SingleBeanRegistry {
+public class DefaultSingleBeanRegistry implements SingleBeanRegistry {
 
     private Map<String, Object> beanNameMap = new HashMap<>();
 
